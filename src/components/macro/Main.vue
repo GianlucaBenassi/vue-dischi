@@ -2,29 +2,40 @@
     <main>
         <div class="container">
             <div class="disk-list row">
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
-                <DiskCard/>
+                <DiskCard v-for="(disk, index) in disks" :key="index" :info="disk"/>
             </div>
         </div>
     </main>
 </template>
 
 <script>
+import axios from 'axios';
 import DiskCard from '../parts/DiskCard.vue';
+
 
 export default {
     name: 'Header',
     components: {
         DiskCard
+    },
+    data() {
+        return {
+            disks: null
+        }
+    },
+    created() {
+        // get disks array
+        axios.get('https://flynn.boolean.careers/exercises/api/array/music')
+        .then((response) => {
+            // handle success
+            this.disks = response.data.response;
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
     }
+
 }
 </script>
 
@@ -37,18 +48,18 @@ main {
 
 .disk-list > * {
     width: 100%;
-    margin: 20px 30px;
+    margin: 10px 20px;
 
     @media screen and (min-width: 576px) {
-        width: calc(100% / 2 - 60px);
+        width: calc(100% / 2 - 40px);
     }
 
     @media screen and (min-width: 768px) {
-        width: calc(100% / 3 - 60px);
+        width: calc(100% / 3 - 40px);
     }
 
     @media screen and (min-width: 992px) {
-        width: calc(100% / 5 - 60px);
+        width: calc(100% / 5 - 40px);
     }
 }
 

@@ -1,15 +1,18 @@
 <template>
     <div class="card">
-        <img src="https://www.onstageweb.com/wp-content/uploads/2018/09/bon-jovi-new-jersey.jpg" alt="">
-        <h2>new jersey</h2>
-        <p>Bon Jovi</p>
-        <p>1988</p>
+        <img :src="info.poster" :alt="info.title">
+        <h2>{{info.title}}</h2>
+        <p>{{info.author}}</p>
+        <p>{{info.year}}</p>
     </div>
 </template>
 
 <script>
 export default {
-
+    name: 'DiskCard',
+    props: {
+        info: Object
+    }
 }
 </script>
 
