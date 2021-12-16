@@ -1,14 +1,21 @@
 <template>
     <main>
         <div class="container">
-
+            <div class="row">
+                <DiskCard/>
+            </div>
         </div>
     </main>
 </template>
 
 <script>
+import DiskCard from '../parts/DiskCard.vue';
+
 export default {
-    name: 'Header'
+    name: 'Header',
+    components: {
+        DiskCard
+    }
 }
 </script>
 
