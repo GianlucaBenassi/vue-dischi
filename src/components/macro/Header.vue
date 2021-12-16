@@ -1,6 +1,6 @@
 <template>
     <header>
-        
+        <img src="../../assets/img/logo.png" alt="">
     </header>
 </template>
 
@@ -10,6 +10,18 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+header {
+    background-color: #2e3a46;
+    height: 80px;
+    line-height: 80px;
+
+    img {
+        height: 80%;
+        vertical-align: middle;
+        margin-left: 20px;
+    }
+}
 
 </style>
