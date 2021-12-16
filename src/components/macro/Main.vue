@@ -1,6 +1,8 @@
 <template>
     <main>
+        <div class="container">
 
+        </div>
     </main>
 </template>
 
@@ -10,6 +12,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+
+main {
+    background-color: #1e2d3b;
+    min-height: calc(100vh - 80px);
+}
 
 </style>
