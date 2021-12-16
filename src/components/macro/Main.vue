@@ -1,7 +1,8 @@
 <template>
     <main>
         <div class="container">
-            <div class="disk-list row">
+            <Loader v-if="disks == null"/>
+            <div class="disk-list row" v-else>
                 <DiskCard v-for="(disk, index) in disks" :key="index" :info="disk"/>
             </div>
         </div>
@@ -11,12 +12,14 @@
 <script>
 import axios from 'axios';
 import DiskCard from '../parts/DiskCard.vue';
+import Loader from '../parts/Loader.vue'
 
 
 export default {
     name: 'Header',
     components: {
-        DiskCard
+        DiskCard,
+        Loader
     },
     data() {
         return {
