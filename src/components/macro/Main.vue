@@ -2,8 +2,13 @@
     <main>
         <div class="container">
             <Loader v-if="disks == null"/>
-            <div class="disk-list row" v-else>
-                <DiskCard v-for="(disk, index) in disks" :key="index" :info="disk"/>
+            <div class="disk-list" v-else>
+                <div class="row filter">
+                    <SelectFilter :infos="disks" type="genre" @filterSelection="searchGenre"/>
+                </div>
+                <div class="row disks">
+                    <DiskCard v-for="(disk, index) in disksFiltered" :key="index" :info="disk"/>
+                </div>
             </div>
         </div>
     </main>
@@ -12,18 +17,33 @@
 <script>
 import axios from 'axios';
 import DiskCard from '../parts/DiskCard.vue';
-import Loader from '../parts/Loader.vue'
+import Loader from '../parts/Loader.vue';
+import SelectFilter from '../parts/SelectFilter.vue'
 
 
 export default {
     name: 'Header',
     components: {
         DiskCard,
-        Loader
+        Loader,
+        SelectFilter
     },
     data() {
         return {
-            disks: null
+            disks: null,
+            genreFilter: ''
+        }
+    },
+    methods: {
+        searchGenre(searchText) {
+            this.genreFilter = searchText;
+        }
+    },
+    computed: {
+        disksFiltered() {
+            return this.disks.filter((elm) => {
+                return elm.genre.includes(this.genreFilter);
+            });
         }
     },
     created() {
@@ -49,20 +69,28 @@ main {
     min-height: calc(100vh - 80px);
 }
 
-.disk-list > * {
-    width: 100%;
-    margin: 10px 20px;
+.disk-list {
 
-    @media screen and (min-width: 576px) {
-        width: calc(100% / 2 - 40px);
+    .filter {
+        justify-content: center;
+        padding: 20px 0;
     }
 
-    @media screen and (min-width: 768px) {
-        width: calc(100% / 3 - 40px);
-    }
-
-    @media screen and (min-width: 992px) {
-        width: calc(100% / 5 - 40px);
+    .disks > * {
+        width: 100%;
+        margin: 10px 20px;
+    
+        @media screen and (min-width: 576px) {
+            width: calc(100% / 2 - 40px);
+        }
+    
+        @media screen and (min-width: 768px) {
+            width: calc(100% / 3 - 40px);
+        }
+    
+        @media screen and (min-width: 992px) {
+            width: calc(100% / 5 - 40px);
+        }
     }
 }
 
