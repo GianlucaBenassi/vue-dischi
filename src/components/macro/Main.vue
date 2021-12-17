@@ -5,6 +5,7 @@
             <div class="disk-list" v-else>
                 <div class="row filter">
                     <SelectFilter :infos="disks" type="genre" @filterSelection="searchGenre"/>
+                    <SelectFilter :infos="disks" type="author" @filterSelection="searchAuthor"/>
                 </div>
                 <div class="row disks">
                     <DiskCard v-for="(disk, index) in disksFiltered" :key="index" :info="disk"/>
@@ -31,18 +32,24 @@ export default {
     data() {
         return {
             disks: null,
-            genreFilter: ''
+            genreFilter: '',
+            authorFilter: ''
         }
     },
     methods: {
         searchGenre(searchText) {
             this.genreFilter = searchText;
+        },
+        searchAuthor(searchText) {
+            this.authorFilter = searchText;
         }
     },
     computed: {
         disksFiltered() {
             return this.disks.filter((elm) => {
-                return elm.genre.includes(this.genreFilter);
+                if (elm.genre.includes(this.genreFilter) && elm.author.includes(this.authorFilter)) {
+                    return true
+                }
             });
         }
     },
