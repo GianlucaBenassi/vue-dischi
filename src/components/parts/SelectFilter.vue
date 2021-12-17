@@ -48,6 +48,8 @@ export default {
 <style lang="scss" scoped>
 
 .filter {
+    text-align: center;
+    flex-grow: 1;
 
     label {
         color: #fff;
