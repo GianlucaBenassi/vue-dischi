@@ -4,8 +4,8 @@
             <Loader v-if="disks == null"/>
             <div class="disk-list" v-else>
                 <div class="row filter">
-                    <SelectFilter :infos="disks" type="genre" @filterSelection="searchGenre"/>
-                    <SelectFilter :infos="disks" type="author" @filterSelection="searchAuthor"/>
+                    <SelectFilter :infos="disksFiltered" type="genre" @filterSelection="searchGenre"/>
+                    <SelectFilter :infos="disksFiltered" type="author" @filterSelection="searchAuthor"/>
                 </div>
                 <div class="row disks">
                     <DiskCard v-for="(disk, index) in disksFiltered" :key="index" :info="disk"/>
@@ -48,7 +48,7 @@ export default {
         disksFiltered() {
             return this.disks.filter((elm) => {
                 if (elm.genre.includes(this.genreFilter) && elm.author.includes(this.authorFilter)) {
-                    return true
+                    return true;
                 }
             });
         }

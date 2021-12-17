@@ -24,12 +24,23 @@ export default {
             selValue: ''
         }
     },
+    methods: {
+        deleteDuplicates() {
+            this.infos.forEach(el => {
+                if (!this.arrValues.includes(el[this.type])) {
+                    this.arrValues.push(el[this.type]);
+                }
+            });
+        }
+    },
     mounted() {
-        this.infos.forEach(el => {
-            if (!this.arrValues.includes(el[this.type])) {
-                this.arrValues.push(el[this.type]);
-            }
-        });
+        this.deleteDuplicates();
+    },
+    watch: {
+        infos() {
+            this.arrValues = [];
+            this.deleteDuplicates();
+        }
     }
 }
 </script>
